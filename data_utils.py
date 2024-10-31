@@ -135,14 +135,11 @@ def get_data_loader(train_data_list, test_data_list) -> (DataLoader, DataLoader,
 
 
 def calc_metrics(target, pred):
-    """
-    计算评估指标，分别为加权准确率、加权召回率、加权F1-score、宏准确率、宏召回率、宏F1-score
-    """
-
-    precision_w = precision_score(target, pred, average='weighted')
+    from sklearn.metrics import precision_score, recall_score, f1_score
+    precision_w = precision_score(target, pred, average='weighted', zero_division=0)
     recall_w = recall_score(target, pred, average='weighted')
     f1_w = f1_score(target, pred, average='weighted')
-    precision = precision_score(target, pred, average='macro')
+    precision = precision_score(target, pred, average='macro', zero_division=0)
     recall = recall_score(target, pred, average='macro')
     f1 = f1_score(target, pred, average='macro')
     return precision_w, recall_w, f1_w, precision, recall, f1
