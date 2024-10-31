@@ -103,7 +103,7 @@ def get_data_loader(train_data_list, test_data_list) -> (DataLoader, DataLoader,
     生成数据负载器
     """
 
-    train_data_length = int(len(train_data_list) * 0.9)
+    train_data_length = int(len(train_data_list) * 0.5)
     valid_data_length = len(train_data_list) - train_data_length
     train_dataset, valid_dataset = random_split(dataset=train_data_list, lengths = [train_data_length, valid_data_length])
 
