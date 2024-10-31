@@ -2,7 +2,6 @@ import torch
 import numpy as np
 from torch.optim import AdamW
 from torch.nn import CrossEntropyLoss
-
 from data_utils import get_data_list, data_preprocess, get_data_loader, calc_metrics
 from model import MultimodalModel
 
@@ -43,7 +42,8 @@ def model_train():
     train_data_list, test_data_list = get_data_list()
     train_data_list, test_data_list = data_preprocess(train_data_list, test_data_list)
     train_data_loader, valid_data_loader, test_data_loader = get_data_loader(train_data_list, test_data_list)
-    model = MultimodalModel.from_pretrained('bert-base-uncased')
+    # model = MultimodalModel.from_pretrained('bert-base-uncased')
+    model = MultimodalModel.from_pretrained('google/bert_uncased_L-2_H-128_A-2')
     model.to(device)
     param_optimizer = list(model.named_parameters())
     no_decay = ['bias', 'LayerNorm.bias', 'LayerNorm.weight']
@@ -148,7 +148,8 @@ def model_test():
     train_data_list, test_data_list = get_data_list()
     train_data_list, test_data_list = data_preprocess(train_data_list, test_data_list)
     train_data_loader, valid_data_loader, test_data_loader = get_data_loader(train_data_list, test_data_list)
-    model = MultimodalModel.from_pretrained('bert-base-uncased')
+    # model = MultimodalModel.from_pretrained('bert-base-uncased')
+    model = MultimodalModel.from_pretrained('google/bert_uncased_L-2_H-128_A-2')
     model.load_state_dict(torch.load('model.pth'))
     model.to(device)
     print('[START_OF_TESTING_STAGE]')
