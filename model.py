@@ -11,21 +11,21 @@ class MultimodalModel(BertPreTrainedModel):
     def __init__(self, config):
         super(MultimodalModel, self).__init__(config)
         self.bert = BertModel(config)
-        self.resnet = ResNetModel.from_pretrained("microsoft/resnet-152")
+        self.resnet = ResNetModel.from_pretrained("microsoft/resnet-50")
         self.comb_attention = BertLayer(config)
         self.W = nn.Linear(in_features=2048, out_features=config.hidden_size)
         self.image_pool = nn.Sequential(
             nn.Linear(config.hidden_size, config.hidden_size),
             nn.Tanh()
         )
-        self.text_pool = nn.Sequential (
+        self.text_pool = nn.Sequential(
             nn.Linear(config.hidden_size, config.hidden_size),
             nn.Tanh()
         )
         self.classifier = nn.Linear(in_features=config.hidden_size * 2, out_features=3)
         self.classifier_single = nn.Linear(in_features=config.hidden_size, out_features=3)
 
-    def forward(self, image_input = None, text_input = None):
+    def forward(self, image_input=None, text_input=None):
         if (image_input is not None) and (text_input is not None):
             """both image and text"""
 
