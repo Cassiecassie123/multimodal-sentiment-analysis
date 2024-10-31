@@ -10,8 +10,8 @@ class MultimodalModel(BertPreTrainedModel):
 
     def __init__(self, config):
         super(MultimodalModel, self).__init__(config)
-        # self.bert = BertModel(config)
-        self.bert = BertModel.from_pretrained('google/bert_uncased_L-2_H-128_A-2')
+        self.bert = BertModel(config)
+        # self.bert = BertModel.from_pretrained('google/bert_uncased_L-2_H-128_A-2')
         self.resnet = ResNetModel.from_pretrained("microsoft/resnet-152")
         self.comb_attention = BertLayer(config)
         self.W = nn.Linear(in_features=2048, out_features=config.hidden_size)
