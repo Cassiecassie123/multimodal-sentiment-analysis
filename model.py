@@ -13,7 +13,7 @@ class MultimodalModel(BertPreTrainedModel):
         self.bert = BertModel(config)
         # self.bert = BertModel.from_pretrained('google/bert_uncased_L-2_H-128_A-2')
         self.resnet = ResNetModel.from_pretrained("microsoft/resnet-152")
-        self.comb_attention = BertLayer(config)
+        self.comb_attention = BertEncoder(config).to(device)
         self.W = nn.Linear(in_features=2048, out_features=config.hidden_size)
         self.image_pool = nn.Sequential(
             nn.Linear(config.hidden_size, config.hidden_size),
