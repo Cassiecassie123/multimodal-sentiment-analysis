@@ -16,7 +16,7 @@ def init_argparse():
     parser.add_argument('--lr', default=5e-5, help='设置学习率', type=float)
     parser.add_argument('--weight_decay', default=1e-2, help='设置权重衰减', type=float)
     parser.add_argument('--epochs', default=10, help='设置训练轮数', type=int)
-    parser.add_argument('--seed', default=42, help='设置随机种子', type=int)
+    parser.add_argument('--seed', default=233, help='设置随机种子', type=int)
     args = parser.parse_args()
     return args
 
